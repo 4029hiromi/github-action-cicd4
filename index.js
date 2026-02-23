@@ -13,7 +13,8 @@ async function run() {
     //コンテキストから必要な情報を取得
     const owner = github.context.repo.owner;
     const repo = github.context.repo.repo;
-    const issueNumber = github.context.issue.number;
+    //const issueNumber = github.context.issue.number;
+    const issueNumber = github.context.payload.pull_request?.number;
 
     //パターンにマッチするファイルを取得
     const globber = await glob.create(files);
@@ -40,7 +41,7 @@ async function run() {
 
     //プルリクエストにコメント
     const octokit = github.getOctokit(token);
-    await octokit.issues.createComment({
+    await octokit.rest.issues.createComment({
       owner,
       repo,
       issue_number: issueNumber,
