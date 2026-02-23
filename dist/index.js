@@ -34999,6 +34999,14 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 6595:
+/***/ ((module) => {
+
+module.exports = eval("require")("@octokit/rest");
+
+
+/***/ }),
+
 /***/ 2078:
 /***/ ((module) => {
 
@@ -36937,6 +36945,7 @@ module.exports = /*#__PURE__*/JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45
 var __webpack_exports__ = {};
 const core = __nccwpck_require__(7484);
 const github = __nccwpck_require__(3228);
+const { Octokit } = __nccwpck_require__(6595);
 const glob = __nccwpck_require__(7206);
 const fs = __nccwpck_require__(9896);
 const path = __nccwpck_require__(6928);
@@ -36986,7 +36995,7 @@ async function run() {
     const body = rows.join("\n");
 
     //プルリクエストにコメント
-    const octokit = new github.GitHub({auth: token});
+    const octokit = new Octokit({ auth: token });
     await octokit.rest.issues.createComment({
       owner,
       repo,
