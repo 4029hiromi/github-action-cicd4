@@ -13,8 +13,17 @@ async function run() {
     //コンテキストから必要な情報を取得
     const owner = github.context.repo.owner;
     const repo = github.context.repo.repo;
+    
+    // デバッグ情報を出力
+    core.info(`Context event: ${github.context.eventName}`);
+    core.info(`Payload: ${JSON.stringify(github.context.payload)}`);
+    
     //const issueNumber = github.context.issue.number;
     const issueNumber = github.context.payload.pull_request?.number;
+
+    if (!issueNumber) {
+      throw new Error('プルリクエストが見つかりません。');
+    }
 
     //パターンにマッチするファイルを取得
     const globber = await glob.create(files);
