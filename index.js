@@ -49,7 +49,7 @@ async function run() {
     const body = rows.join("\n");
 
     //プルリクエストにコメント
-    const octokit = github.getOctokit(token);
+    const octokit = new github.GitHub({auth: token});
     await octokit.rest.issues.createComment({
       owner,
       repo,
