@@ -1,6 +1,5 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const { Octokit } = require('@octokit/rest');
 const glob = require('@actions/glob');
 const fs = require('fs');
 const path = require('path');
@@ -50,7 +49,7 @@ async function run() {
     const body = rows.join("\n");
 
     //プルリクエストにコメント
-    const octokit = new Octokit({ auth: token });
+    const octokit = github.getOctokit(token);
     await octokit.rest.issues.createComment({
       owner,
       repo,
