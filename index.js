@@ -16,6 +16,10 @@ async function run() {
     //const issueNumber = github.context.issue.number;
     const issueNumber = github.context.payload.pull_request?.number;
 
+    if (!issueNumber) {
+      throw new Error('プルリクエストが見つかりません。');
+    }
+
     //パターンにマッチするファイルを取得
     const globber = await glob.create(files);
     const filePaths = await globber.glob();
