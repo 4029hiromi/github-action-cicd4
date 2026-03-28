@@ -1,15 +1,18 @@
+#action.ymlはアクションのメタ情報を定義する。
 name: 'Char count'
 description: 'Count the number of characters and comment on a pull request'
+#Actionがパラメータとして受け取るインプットを定義。 tokenとpatterns。
 inputs:
-  token:
+  token:  #プルリクエストにコメントするためのGitHubトークン
     description: 'The GitHub Token.'
     required: true
-  patterns:
+  patterns:  #文字数を数える対象のファイルのパターン
     description: 'Glob patterns to search files.'
     required: true
+#usingにnode20なので、JavaScriptアクション
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: 'node20'
+  main: 'dist/index.js'  #index.jsを呼び出す
 branding:
   icon: message-square
   color: blue
